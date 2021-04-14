@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_firebase_auth_flow/auth/auth_credentials.dart';
+// import 'package:flutter_bloc_firebase_auth_flow/auth/auth_credentials.dart';
 import 'package:flutter_bloc_firebase_auth_flow/auth/auth_cubit.dart';
 import 'package:flutter_bloc_firebase_auth_flow/auth/auth_repository.dart';
 import 'package:flutter_bloc_firebase_auth_flow/auth/confirm/confirmation_event.dart';
@@ -16,7 +16,7 @@ class ConfirmationBloc extends Bloc<ConfirmationEvent, ConfirmationState> {
   Stream<ConfirmationState> mapEventToState(ConfirmationEvent event) async* {
 
     if (event is ConfirmationCodeChanged) {
-      yield state.copyWith(confirmationCode: event.confirmation_code);
+      yield state.copyWith(confirmationCode: event.confirmationCode);
 
     } else if (event is ConfirmationSubmitted) {
 
@@ -24,7 +24,7 @@ class ConfirmationBloc extends Bloc<ConfirmationEvent, ConfirmationState> {
 
       try {
        final userId =  await authRepo.confirmSignUp(
-            userName: authCubit.credentials.username,
+            userName: authCubit.credentials.email,
             confirmationCode: state.confirmationCode
         );
         yield state.copyWith(formStatus: SubmissionSuccess());

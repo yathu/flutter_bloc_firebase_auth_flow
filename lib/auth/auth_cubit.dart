@@ -16,12 +16,11 @@ class AuthCubit extends Cubit<AuthState> {
   void showSignUP() => emit(AuthState.signUP);
 
   void showConfirmSignUp({
-    String username,
     String email,
     String password,
   }) {
     credentials =
-        AuthCredentials(username: username, password: password, email: email);
+        AuthCredentials(password: password, email: email);
 
     emit(AuthState.confirmSignUP);
   }

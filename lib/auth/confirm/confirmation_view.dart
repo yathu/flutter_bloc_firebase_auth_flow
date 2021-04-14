@@ -66,7 +66,7 @@ class ConfirmationView extends StatelessWidget {
               ? null
               : 'Code is invalid', //TODO: create common validator file
           onChanged: (value) => context.read<ConfirmationBloc>().add(
-                ConfirmationCodeChanged(confirmation_code: value),
+                ConfirmationCodeChanged(confirmationCode: value),
               ),
         );
       },

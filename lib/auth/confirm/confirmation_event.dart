@@ -1,8 +1,8 @@
 abstract class ConfirmationEvent{}
 
 class ConfirmationCodeChanged extends ConfirmationEvent{
-  final String confirmation_code;
-  ConfirmationCodeChanged({this.confirmation_code});
+  final String confirmationCode;
+  ConfirmationCodeChanged({this.confirmationCode});
 }
 
 class ConfirmationSubmitted extends ConfirmationEvent{}

@@ -10,13 +10,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepository authRepo;
   final AuthCubit authCubit;
 
-  LoginBloc({this.authRepo, this.authCubit }) : super(LoginState());
+  LoginBloc({this.authRepo, this.authCubit}) : super(LoginState());
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     //username updated
-    if (event is LoginUsernameChanged) {
-      yield state.copyWith(username: event.username);
+    if (event is LoginEmailChanged) {
+      yield state.copyWith(email: event.email);
 
       //password updated
     } else if (event is LoginPasswordChanged) {
@@ -24,18 +24,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       //form submitted
     } else if (event is LoginSubmitted) {
-
       yield state.copyWith(formStatus: FormSubmitting());
 
       try {
-        final userId = await authRepo.login(userName: state.username, password: state.password);
+        final token = await authRepo.signWithCredentials(
+            email: state.email, password: state.password);
         yield state.copyWith(formStatus: SubmissionSuccess());
 
         authCubit.launchSession(AuthCredentials(
-          username: state.username,
-          userId: userId,
+          email: state.email,
+          userId: token,
         ));
-
       } catch (e) {
         yield state.copyWith(formStatus: SubmissionFailed(e));
       }

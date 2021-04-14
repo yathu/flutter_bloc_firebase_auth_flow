@@ -45,7 +45,7 @@ class SignUpView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _usernameField(),
+                // _usernameField(),
                 _emailField(),
                 _passwordField(),
                 _signUpButton(),

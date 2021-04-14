@@ -15,9 +15,8 @@ class LoginView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: BlocProvider(
-              create: (context) =>
-                  LoginBloc(
-                      authRepo: context.read<AuthRepository>(),
+              create: (context) => LoginBloc(
+                    authRepo: context.read<AuthRepository>(),
                     authCubit: context.read<AuthCubit>(),
                   ),
               child: Stack(
@@ -64,11 +63,11 @@ class LoginView extends StatelessWidget {
             icon: Icon(Icons.person),
             hintText: 'Username',
           ),
-          validator: (value) => state.isValidUserName
+          validator: (value) => state.isValidEmail
               ? null
               : 'username is invalid', //TODO: create common validator file
           onChanged: (value) => context.read<LoginBloc>().add(
-                LoginUsernameChanged(username: value),
+                LoginEmailChanged(email: value),
               ),
         );
       },
