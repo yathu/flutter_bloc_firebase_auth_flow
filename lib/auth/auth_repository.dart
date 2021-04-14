@@ -45,7 +45,9 @@ class AuthRepository {
   }
 
   Future<String> getUser() async {
-    return firebaseAuth.currentUser.refreshToken;
+    print("firebaseAuth.currentUser");
+    print(firebaseAuth.currentUser);
+    return firebaseAuth.currentUser.email;
   }
 
   Future<String> confirmSignUp({

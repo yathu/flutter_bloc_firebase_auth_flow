@@ -13,18 +13,17 @@ class SessionView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Session View'),
-            TextButton(
-                onPressed: () =>
-                    BlocProvider.of<SessionCubit>(context).signOut(),
-                child: Text('Sign out')),
             BlocBuilder<SessionCubit, SessionState>(builder: (context, state) {
               if (state is Authenticated) {
-                return Text('ll');
+                return Text(state.user);
               } else {
                 return Text('Authentication flow error');
               }
             }),
+            TextButton(
+                onPressed: () =>
+                    BlocProvider.of<SessionCubit>(context).signOut(),
+                child: Text('Sign out')),
           ],
         ),
       ),
