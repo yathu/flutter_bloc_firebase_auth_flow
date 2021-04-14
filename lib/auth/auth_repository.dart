@@ -8,6 +8,7 @@ class AuthRepository {
       : this.firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   Future<String> attemptAutoLogin() async {
+    //TODO: user still signed in after deleted it from firebase
     if (await isSignedIn()) {
       return getUser();
     } else
@@ -40,12 +41,12 @@ class AuthRepository {
   }
 
   Future<bool> isSignedIn() async {
-    final currentUser = firebaseAuth.currentUser;
+    final currentUser = await firebaseAuth.currentUser;
     return currentUser != null;
   }
 
   Future<String> getUser() async {
-    return firebaseAuth.currentUser.email;
+    return await firebaseAuth.currentUser.email;
   }
 
   Future<String> confirmSignUp({
