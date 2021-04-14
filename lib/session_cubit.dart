@@ -13,9 +13,6 @@ class SessionCubit extends Cubit<SessionState> {
   void attemptAutoLogin() async {
     try {
       final userId = await authRepository.attemptAutoLogin();
-
-      print("userID--:");
-      print(userId);
       //final user = dataRepo.getUser(userID);
       final user = userId;
       emit(Authenticated(user: user));
